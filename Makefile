@@ -1,0 +1,3 @@
+copy:
+	cp ~/.emacs ./
+

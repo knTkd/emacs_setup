@@ -1,6 +1,12 @@
+;; Hello
 ;; my setting
+
 (global-set-key "\M-?" `help-command)
 (global-set-key "\C-h" `delete-backward-char)
+
+;; recneter を真ん中じゃなくてちょい上にしようとしたけど無理だった;;
+;;https://ayatakesi.github.io/emacs/26.1/html/Recentering.html
+
 
 ;; 日本語環境の設定
 (set-language-environment "Japanese")
@@ -39,6 +45,44 @@
 ;;;;;;;(require 'haskell-mode-autoloads)
 
 ;;;;;;(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+
+
+;; F5 で開いてるファイルの再読込
+
+(defun revert-buffer-no-confirm (&optional force-reverting)
+  "Interactive call to revert-buffer. Ignoring the auto-save
+ file and not requesting for confirmation. When the current buffer
+ is modified, the command refuses to revert it, unless you specify
+ the optional argument: force-reverting to true."
+  (interactive "P")
+  ;;(message "force-reverting value is %s" force-reverting)
+  (if (or force-reverting (not (buffer-modified-p)))
+      (revert-buffer :ignore-auto :noconfirm)
+    (error "The buffer has been modified")))
+
+  ;; reload buffer
+  (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+
+
+
+
+;; スペース、タブなどを可視化する
+;; (global-whitespace-mode 1)
+
+;; 列数を表示する
+(column-number-mode t)
+
+;; 行数を表示する
+(global-linum-mode t)
+
+;; カーソルの点滅をやめる
+(blink-cursor-mode 0)
+
+;; カーソル行をハイライトする
+(global-hl-line-mode t)
+
+;; 対応する括弧を光らせる
+(show-paren-mode 1)
 
 
 
